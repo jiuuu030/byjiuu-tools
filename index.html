@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Jiuu Tools — 유틸 계산기 모음</title>
+  <meta name="description" content="Jiuu Tools: 만 나이 계산기 · BMI 계산기 · 게임 감도 변환기 등 간단하고 빠른 유틸리티 모음." />
+  <meta property="og:title" content="Jiuu Tools" />
+  <meta property="og:description" content="만 나이 / BMI / 감도 변환기 — 모바일 최적화된 간단 툴" />
+  <meta name="twitter:card" content="summary" />
+  <link rel="icon" href="data:,">
+  <style>
+    :root{--bg:#f7f8fb;--card:#fff;--muted:#666;--accent:#0b66ff}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,'Noto Sans KR',Roboto,'Segoe UI';background:var(--bg);color:#111;padding:16px}
+    header{max-width:900px;margin:0 auto 12px}
+    h1{margin:6px 0 2px;font-size:20px}
+    p.lead{margin:0 0 14px;color:var(--muted)}
+    nav{display:flex;gap:8px;margin-bottom:12px}
+    .tab{flex:1;text-align:center;padding:10px;border-radius:10px;background:#fff;border:1px solid #e6e9ef;font-weight:600;cursor:pointer}
+    .tab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+    main{max-width:900px;margin:0 auto}
+    .card{background:var(--card);border-radius:12px;padding:14px;margin-bottom:12px;border:1px solid #e6e9ef}
+    label{display:block;margin:8px 0 6px;font-weight:600}
+    input[type="number"], input[type="date"], select, button{width:100%;padding:10px;border-radius:8px;border:1px solid #d6dae6}
+    .row{display:flex;gap:8px}
+    .row > *{flex:1}
+    .result{margin-top:10px;padding:10px;border-radius:8px;background:#f3f6ff;font-weight:700}
+    .small{font-size:13px;color:var(--muted)}
+    .btn{background:var(--accent);color:#fff;border:none;padding:10px;border-radius:8px;cursor:pointer}
+    footer{max-width:900px;margin:18px auto;color:var(--muted);font-size:13px;text-align:center}
+    @media(min-width:700px){h1{font-size:24px}.tab{padding:12px}}
+  </style>
+</head>
+
+<body>
+<header>
+  <h1>Jiuu Tools</h1>
+  <p class="lead">만 나이 / BMI / 감도(DPI) 변환기 — 간단하고 빠른 유틸</p>
+  <nav>
+    <div class="tab active" data-tab="age">만 나이</div>
+    <div class="tab" data-tab="bmi">BMI</div>
+    <div class="tab" data-tab="sens">감도 변환</div>
+  </nav>
+</header>
+
+<main>
+  <!-- 만 나이 -->
+  <section class="card" id="age">
+    <h2>만 나이 계산기</h2>
+    <label for="birth">생년월일</label>
+    <input id="birth" type="date" />
+    <div class="row" style="margin-top:8px">
+      <button id="calcAge" class="btn">만 나이 계산</button>
+      <button id="copyAge" style="background:#eee;color:#111;border:none;border-radius:8px;cursor:pointer">복사</button>
+    </div>
+    <div class="result" id="ageResult">결과가 여기에 표시됩니다.</div>
+  </section>
+
+  <!-- BMI -->
+  <section class="card" id="bmi" style="display:none">
+    <h2>BMI 계산기</h2>
+    <label for="height">키 (cm)</label>
+    <input id="height" type="number" placeholder="예: 170" />
+    <label for="weight">몸무게 (kg)</label>
+    <input id="weight" type="number" placeholder="예: 60" />
+    <div class="row" style="margin-top:8px">
+      <button id="calcBmi" class="btn">계산</button>
+      <button id="clearBmi" style="background:#eee;color:#111;border:none;border-radius:8px;cursor:pointer">초기화</button>
+    </div>
+    <div class="result" id="bmiResult"></div>
+  </section>
+
+  <!-- 감도 변환 -->
+  <section class="card" id="sens" style="display:none">
+    <h2>감도(DPI) 변환기</h2>
+    <label for="fromGame">변환 기준 게임</label>
+    <select id="fromGame">
+      <option value="valorant">Valorant</option>
+      <option value="cs">CS:GO</option>
+      <option value="ow">Overwatch</option>
+    </select>
+
+    <label for="fromSens">현재 감도</label>
+    <input id="fromSens" type="number" step="0.0001" placeholder="예: 0.5" />
+
+    <label for="fromDPI">현재 DPI</label>
+    <input id="fromDPI" type="number" placeholder="예: 800" />
+
+    <label for="toGame">변환할 게임</label>
+    <select id="toGame">
+      <option value="valorant">Valorant</option>
+      <option value="cs">CS:GO</option>
+      <option value="ow">Overwatch</option>
+    </select>
+
+    <label for="toDPI">변환할 DPI</label>
+    <input id="toDPI" type="number" placeholder="예: 400" />
+
+    <div class="row" style="margin-top:8px">
+      <button id="calcSens" class="btn">변환</button>
+      <button id="copySens" style="background:#eee;color:#111;border:none;border-radius:8px;cursor:pointer">복사</button>
+    </div>
+
+    <div class="result" id="sensResult">변환 결과가 여기에 표시됩니다.</div>
+    <div class="small">※ 게임별 스케일 차이가 있어 근사값이 표시됩니다.</div>
+  </section>
+</main>
+
+<footer>
+  <div>ⓒ 2025 Jiuu • 제작: Jiuu (byjiuu)</div>
+</footer>
+
+<script>
+  // 탭 전환
+  const tabs = document.querySelectorAll('.tab');
+  const sections = { age: document.getElementById('age'), bmi: document.getElementById('bmi'), sens: document.getElementById('sens') };
+  tabs.forEach(t => t.addEventListener('click', () => {
+    tabs.forEach(x => x.classList.remove('active'));
+    t.classList.add('active');
+    const key = t.dataset.tab;
+    for(const k in sections) sections[k].style.display = (k === key ? 'block' : 'none');
+  }));
+
+  // 만 나이 계산
+  document.getElementById('calcAge').addEventListener('click', () => {
+    const val = document.getElementById('birth').value;
+    if(!val){ document.getElementById('ageResult').textContent='생일을 입력하세요.'; return; }
+    const b = new Date(val), now = new Date();
+    let age = now.getFullYear() - b.getFullYear();
+    const m = now.getMonth() - b.getMonth();
+    if(m < 0 || (m === 0 && now.getDate() < b.getDate())) age--;
+    document.getElementById('ageResult').textContent = `만 ${age}세입니다.`;
+  });
+  document.getElementById('copyAge').addEventListener('click', async () => {
+    try{ await navigator.clipboard.writeText(document.getElementById('ageResult').textContent || ''); alert('복사됨'); }catch{ alert('복사 실패'); }
+  });
+
+  // BMI 계산
+  document.getElementById('calcBmi').addEventListener('click', () => {
+    const h = parseFloat(document.getElementById('height').value);
+    const w = parseFloat(document.getElementById('weight').value);
+    if(!h || !w){ document.getElementById('bmiResult').textContent='값을 입력하세요.'; return; }
+    const m = h / 100, bmi = w / (m*m);
+    let cat = bmi < 18.5 ? '저체중' : bmi < 24.9 ? '정상' : bmi < 29.9 ? '과체중' : '비만';
+    document.getElementById('bmiResult').textContent = `BMI: ${bmi.toFixed(1)} (${cat})`;
+  });
+  document.getElementById('clearBmi').addEventListener('click', () => {
+    document.getElementById('height').value=''; document.getElementById('weight').value=''; document.getElementById('bmiResult').textContent='';
+  });
+
+  // 감도 변환 (간단 근사)
+  const gameScale = { valorant: 0.07, cs: 0.02, ow: 0.022 };
+  function convertSens(fromGame, fromSens, fromDPI, toGame, toDPI){
+    const base = fromSens * fromDPI * (gameScale[fromGame] || 1);
+    return base / (toDPI * (gameScale[toGame] || 1));
+  }
+  document.getElementById('calcSens').addEventListener('click', () => {
+    const fg = document.getElementById('fromGame').value;
+    const tg = document.getElementById('toGame').value;
+    const fs = parseFloat(document.getElementById('fromSens').value);
+    const fd = parseFloat(document.getElementById('fromDPI').value);
+    const td = parseFloat(document.getElementById('toDPI').value);
+    if(!fs || !fd || !td){ document.getElementById('sensResult').textContent = '모든 값을 입력하세요.'; return; }
+    const res = convertSens(fg, fs, fd, tg, td);
+    document.getElementById('sensResult').textContent = `변환 감도: ${res.toFixed(4)} (근사값)`;
+  });
+  document.getElementById('copySens').addEventListener('click', async () => {
+    try{ await navigator.clipboard.writeText(document.getElementById('sensResult').textContent || ''); alert('복사됨'); }catch{ alert('복사 실패'); }
+  });
+</script>
+</body>
+</html>
