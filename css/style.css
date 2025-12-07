@@ -1,0 +1,96 @@
+:root{
+  --bg:#ffffff;
+  --text:#111;
+  --top:#4c8bf5;
+  --nav:#222;
+  --card:#f4f4f4;
+  --accent:#4c8bf5;
+}
+body.dark{
+  --bg:#0d0f12;
+  --text:#fff;
+  --top:#2a5bd7;
+  --nav:#111;
+  --card:#1b1e22;
+  --accent:#7fa8ff;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.top-bar{
+  background:var(--top);
+  color:white;
+  padding:14px 16px;
+  text-align:center;
+  font-size:20px;
+  font-weight:600;
+}
+.nav{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--nav);
+  padding:8px 20px;
+}
+.nav-left a{
+  color:#fff;
+  text-decoration:none;
+  margin-right:18px;
+  font-weight:500;
+}
+.nav-left a:hover{text-decoration:underline}
+.nav-right{}
+.dark-btn{
+  background:rgba(255,255,255,0.08);
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:16px;
+}
+.main{
+  padding:40px 20px;
+  text-align:center;
+}
+h1{margin:10px 0 28px 0;font-size:26px}
+.btn-row{margin:12px 0}
+button.main-btn{
+  background:var(--accent);
+  border:none;color:white;padding:12px 18px;border-radius:10px;
+  cursor:pointer;font-weight:600;margin:0 8px;font-size:15px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+button.sub-btn{
+  background:#5f9af7;border:none;color:white;padding:10px 16px;border-radius:10px;
+  cursor:pointer;margin:6px;font-weight:600;font-size:14px;
+}
+button:active{transform:translateY(1px)}
+.result-box{
+  width:min(880px,90%);
+  margin:30px auto 80px auto;
+  background:var(--card);
+  padding:22px;
+  border-radius:12px;
+  font-size:18px;
+  line-height:1.6;
+  box-shadow:0 10px 30px rgba(0,0,0,0.08);
+  text-align:left;
+  animation:fadeUp .28s ease-out;
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+.hidden{display:none}
+@media (max-width:600px){
+  .top-bar{font-size:18px}
+  button.main-btn,button.sub-btn{display:block;margin:10px auto}
+  .result-box{width:92%;font-size:16px}
+}
