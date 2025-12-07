@@ -1,25 +1,49 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Jiuu’s First Web</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      padding: 40px;
-      text-align: center;
-    }
-    h1 {
-      color: #333;
-    }
-    p {
-      color: #555;
-    }
-  </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>운세 & 명언 사이트</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <h1>안녕하세요! Jiuu의 첫 웹페이지입니다 👋</h1>
-  <p>이 페이지는 GitHub Pages로 만들어졌어요!</p>
+
+  <!-- 상단 파란 타이틀 바 (원래 있던 디자인 유지) -->
+  <header class="top-bar">운세 & 명언 사이트</header>
+
+  <!-- 검정 네비바 (홈 / 소개 유지) + 다크 버튼 오른쪽 정렬 -->
+  <nav class="nav">
+    <div class="nav-left">
+      <a href="index.html">홈</a>
+      <a href="about.html">소개</a>
+    </div>
+    <div class="nav-right">
+      <button id="darkToggle" class="dark-btn" aria-label="토글 다크모드">🌙</button>
+    </div>
+  </nav>
+
+  <!-- 메인 컨텐츠 -->
+  <main class="main">
+    <h1>오늘의 명언 & 운세</h1>
+
+    <div class="btn-row">
+      <button class="main-btn" id="quoteBtn">오늘의 명언 보기</button>
+      <button class="main-btn" id="todayBtn">오늘의 운세 보기</button>
+    </div>
+
+    <div class="btn-row">
+      <button class="sub-btn" id="moneyBtn">금전운 보기</button>
+      <button class="sub-btn" id="studyBtn">학업운 보기</button>
+      <button class="sub-btn" id="loveBtn">연애운 보기</button>
+    </div>
+
+    <!-- 결과가 이 박스 안에 예쁘게 표시된다 -->
+    <div id="resultBox" class="result-box hidden" role="status" aria-live="polite"></div>
+  </main>
+
+  <!-- 데이터와 로직 로드: fortune 폴더의 데이터 먼저 불러오고, 마지막으로 동작 스크립트 -->
+  <script src="fortune/fortune-today.js"></script>
+  <script src="fortune/quotes.js"></script>
+  <script src="js/scripts.js"></script>
 </body>
 </html>

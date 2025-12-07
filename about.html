@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>소개</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: #f5f5f5;
+      color: #222;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .dark {
+      background: #121212;
+      color: #fff;
+    }
+
+    /* 네비 */
+    nav {
+      margin-bottom: 35px;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-size: 20px;
+      margin: 0 12px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: #e3e3e3;
+      color: #000;
+      transition: 0.3s;
+    }
+
+    nav a:hover {
+      background: #4c8bf5;
+      color: white;
+    }
+
+    .dark nav a {
+      background: #1e1e1e;
+      color: white;
+    }
+
+    /* 제목 (홈과 동일 크기, 동일 여백) */
+    h1 {
+      font-size: 34px;
+      margin-bottom: 25px;
+      font-weight: bold;
+    }
+
+    /* 박스 디자인 (홈에 있는 운세/명언 결과 박스와 동일한 스타일) */
+    .about-box {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      font-size: 21px;
+      line-height: 1.7;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    }
+
+    .dark .about-box {
+      background: #1f1f1f;
+      box-shadow: 0 4px 12px rgba(255,255,255,0.07);
+    }
+
+    /* 다크모드 버튼 */
+    .toggle-btn {
+      margin-top: 30px;
+      padding: 12px 25px;
+      font-size: 18px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background: #444;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .toggle-btn:hover {
+      background: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html">🏠 홈</a>
+    <a href="about.html">ℹ️ 소개</a>
+  </nav>
+
+  <h1>사이트 소개</h1>
+
+  <div class="about-box">
+    <p>
+      이 웹사이트는 사용자가<br><br>
+      <strong>오늘의 명언</strong>,  
+      <strong>오늘의 운세</strong>,  
+      <strong>금전운 · 학업운 · 연애운</strong><br><br>
+      을 간단한 버튼 클릭으로 확인할 수 있도록 만든 페이지입니다.
+    </p>
+    <p>
+      모든 구성은 홈 화면과 동일한 디자인으로 유지되며,  
+      다크모드 또한 홈과 100% 동일하게 적용됩니다.
+    </p>
+  </div>
+
+  <button class="toggle-btn" onclick="toggleTheme()">🌙 / ☀️</button>
+
+  <script>
+    function toggleTheme() {
+      document.body.classList.toggle("dark");
+      localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+      }
+    };
+  </script>
+
+</body>
+</html>
